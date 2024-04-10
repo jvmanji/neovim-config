@@ -39,4 +39,9 @@ require("lazy").setup({
     'nvim-telescope/telescope.nvim', tag = '0.1.4',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  },
+  "folke/trouble.nvim",
 })
