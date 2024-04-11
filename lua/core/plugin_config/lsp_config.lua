@@ -40,6 +40,7 @@ require("lspconfig").ruby_ls.setup({})
 require("lspconfig").sorbet.setup({})
 require("lspconfig").standardrb.setup({})
 -- require("lspconfig").trivy.setup({})
+require("lspconfig").helm_ls.setup({})
 
 require('lspconfig')['hls'].setup{
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
