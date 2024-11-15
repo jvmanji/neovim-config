@@ -1,0 +1,64 @@
+#!/bin/bash
+
+shell="$1"
+
+in=$(cat)
+
+md=""
+
+h=$(echo "$in" | head -1)
+
+if [ "" = "$shell" ] ; then
+    shopt -s extglob
+    case "$h" in
+        *'```php'*) md='```php';;
+        *'```bash'*) md='```bash';;
+        *'```python'*) md='```python';;
+        *'```ruby'*) md='```ruby';;
+        *'```javascript'*) md='```javascript';;
+        *'```haskell'*) md='```haskell';;
+        *'```'*) md='```';;
+    esac
+
+    case "$h" in
+        *php*) shell='php';;
+        *PHP*) shell='php';;
+        *ruby*) shell='ruby';;
+        *python*) shell='python3';;
+        *bash*) shell='bash';;
+        *node*) shell='node';;
+        *haskell*) shell='runhaskell';;
+        *js*) shell='node';;
+        *javascript*) shell='node';;
+        *rb*) shell='ruby';;
+        *py*) shell='python3';;
+        *hs*) shell='runhaskell';;
+    esac
+    shopt -u extglob
+fi
+
+comment="#"
+
+case "$shell" in
+    "php") comment="//";;
+    "node") comment="//";;
+    "runhaskell") comment="--";;
+esac
+
+echo "$in"
+
+echo ""
+
+if [ "" != "$md" ] ; then
+    echo "$md"
+fi
+
+echo "$comment Output [$shell] [$(date +'%Y-%m-%d %H:%M:%S')]:"
+echo "$comment -----------------"
+echo "$comment"
+if [ "" = "$md" ] ; then
+    echo "$in" | $shell | awk '{print "'$comment' " $0 }'
+else
+    echo "$in" | sed '1,1d ; $ d' | $shell | awk '{print "'$comment' " $0 }'
+    echo '```'
+fi
