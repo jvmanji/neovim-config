@@ -1,5 +1,5 @@
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "solargraph", "ts_ls" }
+  ensure_installed = { "lua_ls" }
 })
 
 local lspconfig = require('lspconfig')
@@ -39,29 +39,30 @@ require("lspconfig").lua_ls.setup {
 --   }
 -- }
 
-require("lspconfig").solargraph.setup({
-   settings = {
-     solargraph = {
-       diagnostics = true
-     }
-   }
-})
+-- require("lspconfig").solargraph.setup({
+--    settings = {
+--      solargraph = {
+--        diagnostics = true
+--      }
+--    }
+-- })
 -- require("lspconfig").sorbet.setup({})
 -- require("lspconfig").standardrb.setup({})
 -- require("lspconfig").rubocop.setup({})
-require("lspconfig").ruby_lsp.setup({})
+require("lspconfig").ruby_ls.setup({})
 -- require("lspconfig").erb_lint.setup({})
 -- require("lspconfig").rubyfmt.setup({})
 -- require("lspconfig").rufo.setup({})
 -- require("lspconfig").trivy.setup({})
 
-require("lspconfig").ts_ls.setup({})
+require("lspconfig").tsserver.setup({})
 require("lspconfig").gopls.setup({})
 require("lspconfig").phpactor.setup({})
 require("lspconfig").helm_ls.setup({})
 require("lspconfig").pyright.setup({})
 require("lspconfig").java_language_server.setup({})
 require("lspconfig").kotlin_language_server.setup({})
+require("lspconfig").csharp_ls.setup({})
 
 require('lspconfig')['hls'].setup{
   filetypes = { 'haskell', 'lhaskell', 'cabal' },

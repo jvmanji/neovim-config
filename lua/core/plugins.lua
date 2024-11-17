@@ -26,6 +26,7 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim",
   "junegunn/vim-easy-align",
   "matze/vim-move",
+  "Exafunction/codeium.vim",
   "neovim/nvim-lspconfig",
   {
     "vinnymeller/swagger-preview.nvim",
