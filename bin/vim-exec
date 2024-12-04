@@ -17,6 +17,7 @@ if [ "" = "$shell" ] ; then
         *'```ruby'*) md='```ruby';;
         *'```javascript'*) md='```javascript';;
         *'```haskell'*) md='```haskell';;
+        *'```kotlin'*) md='```kotlin';;
         *'```'*) md='```';;
     esac
 
@@ -28,11 +29,13 @@ if [ "" = "$shell" ] ; then
         *bash*) shell='bash';;
         *node*) shell='node';;
         *haskell*) shell='runhaskell';;
+        *kotlin*) shell='kotlin';;
         *js*) shell='node';;
         *javascript*) shell='node';;
         *rb*) shell='ruby';;
         *py*) shell='python3';;
         *hs*) shell='runhaskell';;
+        *kt*) shell='kotlin';;
     esac
     shopt -u extglob
 fi
@@ -43,6 +46,7 @@ case "$shell" in
     "php") comment="//";;
     "node") comment="//";;
     "runhaskell") comment="--";;
+    "kotlin") comment="//";;
 esac
 
 echo "$in"
@@ -53,12 +57,20 @@ if [ "" != "$md" ] ; then
     echo "$md"
 fi
 
+runShell() {
+    case "$1" in
+        "kotlin") mkdir -p /tmp/.neovim/kotlinc; echo "$2" > /tmp/.neovim/kotlinc/tmp.kts; kotlinc -script /tmp/.neovim/kotlinc/tmp.kts ; rm /tmp/.neovim/kotlinc/tmp.kts;;
+        *) echo "$2" | "$shell";;
+    esac
+}
+
 echo "$comment Output [$shell] [$(date +'%Y-%m-%d %H:%M:%S')]:"
 echo "$comment -----------------"
 echo "$comment"
 if [ "" = "$md" ] ; then
-    echo "$in" | $shell | awk '{print "'$comment' " $0 }'
+    runShell "$shell" "$in" | awk '{print "'$comment' " $0 }'
 else
-    echo "$in" | sed '1,1d ; $ d' | $shell | awk '{print "'$comment' " $0 }'
+    in="$(echo "$in" | sed '1,1d ; $ d')"
+    runShell "$shell" "$in" | awk '{print "'$comment' " $0 }'
     echo '```'
 fi
