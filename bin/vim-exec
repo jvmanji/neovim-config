@@ -64,9 +64,14 @@ runShell() {
     esac
 }
 
+if [ "php" = "$shell" ] ; then
+    echo '<?php'
+fi
+
 echo "$comment Output [$shell] [$(date +'%Y-%m-%d %H:%M:%S')]:"
 echo "$comment -----------------"
 echo "$comment"
+
 if [ "" = "$md" ] ; then
     runShell "$shell" "$in" | awk '{print "'$comment' " $0 }'
 else
