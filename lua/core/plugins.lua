@@ -27,6 +27,10 @@ require("lazy").setup({
   "junegunn/vim-easy-align",
   "matze/vim-move",
   "Exafunction/codeium.vim",
+  {
+    "phpactor/phpactor",
+    run = "composer install --no-dev -o"
+  },
   "neovim/nvim-lspconfig",
   {
     "vinnymeller/swagger-preview.nvim",
@@ -82,3 +86,12 @@ require("lazy").setup({
     },
   },
 })
+
+-- Rethink:
+--  - https://github.com/vimeo/psalm
+--  - https://phpactor.readthedocs.io/en/master/reference/refactorings.html#extract-method
+--  - https://psalm.dev/docs/manipulating_code/refactoring/
+--  - https://pestphp.com/docs/editor-setup
+--  - https://github.com/nvim-neotest/neotest
+--  - https://github.com/mfussenegger/nvim-dap
+--  - https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#php
